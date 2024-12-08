@@ -1,4 +1,6 @@
 import Link from "next/link";
+import connectDB from "../lib/connectDb";
+import Tale from "../models/tale";
 
 const list =
   [
@@ -46,7 +48,10 @@ const list =
     }
   ]
 
-export default function Home() {
+export default async function Home() {
+  await connectDB();
+  const tales = await Tale.find().limit(20);
+
   return (
     <div>
       <header className="p-2 shadow">
@@ -55,10 +60,10 @@ export default function Home() {
         </div>
       </header>
       <main className="p-2 grid gap-2 max-w-4xl m-auto">
-        {list.map((story) =>
-          <Link href={'/tale/hello'} key={story.title} className="shadow p-2">
+        {tales.map((story) =>
+          <Link href={`/tale/${story.slug}`} key={story._id} className="shadow p-2">
             <div className="text-lg text-slate-900">{story.title}</div>
-            <div className=" text-gray-600">{story.content}</div>
+            <div className=" text-gray-600">{story.content[0]}</div>
           </Link>
         )
         }
