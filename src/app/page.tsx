@@ -2,6 +2,7 @@ import Link from "next/link";
 import connectDB from "../lib/connectDb";
 import Tale from "../models/tale";
 
+export const dynamic = 'force-dynamic'
 export default async function Home() {
   await connectDB();
   const tales = await Tale.aggregate(
