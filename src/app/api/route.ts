@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "../../lib/connectDb";
 import Tale from "../../models/tale";
 
-export async function GET(request: Request) {
+export async function GET() {
     await connectDB();
     await Tale.create({
         title: "The Whispering Forest",
