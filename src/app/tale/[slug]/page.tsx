@@ -4,7 +4,7 @@ import connectDB from "../../../lib/connectDb";
 
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-    connectDB();
+    await connectDB();
     const tale = await Tale.findOne({
         slug: (await params).slug
     });
