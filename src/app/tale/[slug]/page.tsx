@@ -6,7 +6,7 @@ import connectDB from "../../../lib/connectDb";
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     await connectDB();
     const tale = await Tale.findOne({
-        slug: (await params).slug
+        slug: decodeURIComponent((await params).slug)
     });
     if (!tale) {
         return <>Not Found</>
