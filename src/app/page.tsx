@@ -17,7 +17,7 @@ export default async function Home() {
       </header>
       <main className="p-2 grid gap-2 max-w-4xl m-auto">
         {tales.map((story) =>
-          <Link href={`/tale/${story.slug}`} key={story._id} className="shadow p-2">
+          <Link href={`/tale/${encodeURIComponent(story.slug)}`} key={story._id} className="shadow p-2">
             <div className="text-lg text-slate-900">{story.title}</div>
             <div className=" text-gray-600 line-clamp-3">{story.content[0]}</div>
           </Link>
