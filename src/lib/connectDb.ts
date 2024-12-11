@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 declare global {
-    var mongoose: { conn: any, promise: any };
+    var mongoose: { conn: any, promise: any }; //eslint-disable-line
 }
 
 const DATABASE_URL = process.env.DATABASE_URL || '';
