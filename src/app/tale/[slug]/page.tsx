@@ -6,7 +6,6 @@ import { Metadata } from "next";
 export async function generateMetadata(
     { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata | null> {
-    const slug = (await params).slug
     await connectDB();
     const tale = await Tale.findOne({
         slug: decodeURIComponent((await params).slug)
