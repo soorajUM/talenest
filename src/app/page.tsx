@@ -52,6 +52,7 @@ export default async function Home({ searchParams }: {
           </Link>
         )
         }
+        {!searchKey && <Link href="/" className="py-2 px-4 shadow rounded m-auto bg-gray-200">More {">"}</Link>}
       </main>
     </div>
   );
