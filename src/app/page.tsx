@@ -2,6 +2,28 @@ import Link from "next/link";
 import connectDB from "../lib/connectDb";
 import Tale from "../models/tale";
 import Search from "./components/Search";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TaleNest | Where Stories Take Flight.",
+  description: "The Gateway to a world of imagination and inspiration. Here, we celebrate the power of storytelling through short stories.",
+  keywords: [
+    'Storytelling',
+    'Imagination',
+    'Inspiration',
+    'Creativity',
+    'Community',
+    'Connection',
+    'Adventure',
+    'Perspectives',
+    'Narrative',
+    'Discover',
+    'Share',
+    'Explore',
+    'Passion',
+    'Ideas',
+  ]
+};
 
 export const dynamic = 'force-dynamic'
 export default async function Home({ searchParams }: {

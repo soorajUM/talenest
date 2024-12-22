@@ -1,7 +1,25 @@
 import Link from "next/link";
 import Tale from "../../../models/tale";
 import connectDB from "../../../lib/connectDb";
+import { Metadata } from "next";
 
+export async function generateMetadata(
+    { params }: { params: Promise<{ slug: string }> },
+): Promise<Metadata | null> {
+    const slug = (await params).slug
+    await connectDB();
+    const tale = await Tale.findOne({
+        slug: decodeURIComponent((await params).slug)
+    });
+    if (tale) {
+        return {
+            title: `${tale.title} | TaleNext`,
+            description: tale.content[0],
+            keywords: tale.tags
+        }
+    }
+    return null
+}
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
     await connectDB();
