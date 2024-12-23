@@ -2,6 +2,7 @@ import Link from "next/link";
 import Tale from "../../../models/tale";
 import connectDB from "../../../lib/connectDb";
 import { Metadata } from "next";
+import Search from "../../components/Search";
 
 export async function generateMetadata(
     { params }: { params: Promise<{ slug: string }> },
@@ -31,8 +32,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     return (
         <div>
             <header className="p-2 shadow" >
-                <div className=" max-w-4xl m-auto" >
+                <div className=" max-w-4xl m-auto flex justify-between">
                     <Link href={'/'} className=" text-green-900 font-bold text-2xl" > TaleNest </Link>
+                    <div className="border flex content-center rounded">
+                        <Search />
+                    </div>
                 </div>
             </header>
             < main className="p-2 grid gap-2 max-w-4xl m-auto" >
