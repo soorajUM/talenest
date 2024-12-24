@@ -21,7 +21,7 @@ export default function RootLayout({
           }} />
         <Script
           type="text/javascript"
-          id='clarity'
+          id='ms_clarity'
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
