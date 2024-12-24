@@ -9,6 +9,7 @@ const Search = () => {
     return (
         <>
             <input
+                aria-label="Search"
                 value={searchKey}
                 onChange={(e) => setSearchKey(e.target.value)}
                 type="text"
