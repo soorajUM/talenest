@@ -42,12 +42,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             </header>
             < main className="p-2 grid gap-2 max-w-4xl m-auto" >
                 <div key={tale._id} className="shadow p-4" >
-                    <div className="text-xl text-slate-900 pb-4 font-bold" > {tale.title}
+                    <h1 className="text-xl text-slate-900 pb-4 font-bold" > {tale.title}
                         <PlayButton
                             title={tale.title}
                             content={tale.content}
                         />
-                    </div>
+                    </h1>
                     < div className=" text-gray-600 grid gap-4 text-lg" > {
                         tale.content.map((text: string, i: number) =>
                             <div key={i}>
