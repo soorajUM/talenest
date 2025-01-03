@@ -71,7 +71,7 @@ export default async function Home({ searchParams }: {
       </header>
       <div className="max-w-6xl m-auto py-4">
         {!!searchKey && <div>Results for: <Link href="/" className="shadow py-1 px-2 rounded">{searchKey} X</Link></div>}
-        <main className="p-2 pb-6 grid gap-2 grid-cols-4">
+        <main className="p-2 pb-6 grid gap-2 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2">
           {tales.map((story) =>
             <Link
               href={`/tale/${encodeURIComponent(story.slug)}`} key={story._id} className="shadow">
