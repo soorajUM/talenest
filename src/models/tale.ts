@@ -5,7 +5,9 @@ const TaleSchema = new mongoose.Schema(
         title: String,
         content: [String],
         tags: [String],
-        slug: String
+        slug: String,
+        coverImage: String,
+        thumpImage: String,
     },
     {
         timestamps: true,

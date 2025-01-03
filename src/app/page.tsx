@@ -3,6 +3,7 @@ import connectDB from "../lib/connectDb";
 import Tale from "../models/tale";
 import Search from "./components/Search";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "TaleNest | Where Stories Take Flight.",
@@ -51,31 +52,47 @@ export default async function Home({ searchParams }: {
     );
   } else {
     tales = await Tale.aggregate(
-      [{ $sample: { size: 20 } }]
+      [
+        { $match: { coverImage: { $exists: true } } },
+        { $sample: { size: 20 } }
+      ]
     );
   }
 
   return (
     <div>
       <header className="p-2 shadow">
-        <div className=" max-w-4xl m-auto flex justify-between">
+        <div className=" max-w-6xl m-auto flex justify-between">
           <div className=" text-green-900 font-bold text-2xl">TaleNest</div>
           <div className="border flex content-center rounded">
             <Search />
           </div>
         </div>
       </header>
-      <main className="p-2 grid gap-2 max-w-4xl m-auto">
+      <div className="max-w-6xl m-auto py-4">
         {!!searchKey && <div>Results for: <Link href="/" className="shadow py-1 px-2 rounded">{searchKey} X</Link></div>}
-        {tales.map((story) =>
-          <Link href={`/tale/${encodeURIComponent(story.slug)}`} key={story._id} className="shadow p-2">
-            <div className="text-lg text-slate-900">{story.title}</div>
-            <div className=" text-gray-600 line-clamp-3">{story.content[0]}</div>
-          </Link>
-        )
-        }
-        {!searchKey && <Link href="/" className="py-2 px-4 shadow rounded m-auto bg-gray-200">More {">"}</Link>}
-      </main>
+        <main className="p-2 pb-6 grid gap-2 grid-cols-4">
+          {tales.map((story) =>
+            <Link
+              href={`/tale/${encodeURIComponent(story.slug)}`} key={story._id} className="shadow">
+              <Image
+                src={`https://utfs.io/f/${story.thumpImage}`}
+                alt={story.title}
+                width={300}
+                height={300}
+              />
+              <div
+                className="text-lg text-slate-900 line-clamp-1 px-2 py-1 font-semibold"
+                title={story.title}
+              >{story.title}</div>
+            </Link>
+          )
+          }
+        </main>
+        <div className="grid place-items-center">
+          {!searchKey && <Link href="/" className="py-2 px-4 shadow rounded bg-gray-200">More {">"}</Link>}
+        </div>
+      </div>
     </div>
   );
 }

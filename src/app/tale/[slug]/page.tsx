@@ -33,14 +33,14 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     return (
         <div>
             <header className="p-2 shadow" >
-                <div className=" max-w-4xl m-auto flex justify-between">
+                <div className=" max-w-6xl m-auto flex justify-between">
                     <Link href={'/'} className=" text-green-900 font-bold text-2xl" > TaleNest </Link>
                     <div className="border flex content-center rounded">
                         <Search />
                     </div>
                 </div>
             </header>
-            < main className="p-2 grid gap-2 max-w-4xl m-auto" >
+            < main className="p-2 grid gap-2 max-w-6xl m-auto" >
                 <div key={tale._id} className="shadow p-4" >
                     <h1 className="text-xl text-slate-900 pb-4 font-bold" > {tale.title}
                         <PlayButton
