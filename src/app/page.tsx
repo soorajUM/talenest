@@ -4,6 +4,7 @@ import Tale from "../models/tale";
 import Search from "./components/Search";
 import { Metadata } from "next";
 import Image from "next/image";
+import ThumpImage from '@/app/components/ThumpImage';
 
 export const metadata: Metadata = {
   title: "TaleNest | Where Stories Take Flight.",
@@ -75,12 +76,14 @@ export default async function Home({ searchParams }: {
           {tales.map((story) =>
             <Link
               href={`/tale/${encodeURIComponent(story.slug)}`} key={story._id} className="shadow">
-              <Image
-                src={`https://utfs.io/f/${story.thumpImage}`}
-                alt={story.title}
-                width={300}
-                height={300}
-              />
+              {story.thumpImage ?
+                <Image
+                  src={`https://utfs.io/f/${story.thumpImage}`}
+                  alt={story.title}
+                  width={400}
+                  height={400}
+                /> : <ThumpImage title={story.title} />
+              }
               <div
                 className="text-lg text-slate-900 line-clamp-1 px-2 py-1 font-semibold"
                 title={story.title}
