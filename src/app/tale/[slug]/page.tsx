@@ -4,6 +4,7 @@ import connectDB from "../../../lib/connectDb";
 import { Metadata } from "next";
 import Search from "../../components/Search";
 import PlayButton from "../../components/PlayButton";
+import { WithContext, Book } from "schema-dts";
 
 export async function generateMetadata(
     { params }: { params: Promise<{ slug: string }> },
@@ -30,8 +31,25 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     if (!tale) {
         return <>Not Found</>
     }
+    const jsonLd: WithContext<Book> = {
+        '@context': 'https://schema.org',
+        '@type': 'Book',
+        name: tale.title,
+        image: `https://utfs.io/f/${tale.thumpImage}`,
+        description: tale.content?.[0],
+        author: {
+            "@type": "Person",
+            name: "TaleNest"
+        },
+        dateModified: tale.createdAt
+    }
+
     return (
         <div>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <header className="p-2 shadow" >
                 <div className=" max-w-6xl m-auto flex justify-between">
                     <Link href={'/'} className=" text-green-900 font-bold text-2xl" > TaleNest </Link>
